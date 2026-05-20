@@ -194,21 +194,38 @@ button:hover{
 .letterModal{
     position:fixed;
     inset:0;
+
     background:rgba(0,0,0,.75);
+
     display:none;
+
     justify-content:center;
     align-items:center;
+
+    padding:20px;
+
     z-index:50;
 }
 
 .letterPaper{
     position:relative;
+
     width:700px;
+    max-width:92%;
+
+    max-height:85vh;
+
+    overflow-y:auto;
+
     background:#fffaf4;
     color:#2f1c3b;
+
     padding:60px;
+
     border-radius:20px;
+
     box-shadow:0 0 50px rgba(0,0,0,.4);
+
     animation:popup .6s ease;
 }
 
@@ -230,6 +247,17 @@ button:hover{
     right:25px;
     cursor:pointer;
     font-size:1.5rem;
+}
+
+/* SCROLLBAR */
+
+.letterPaper::-webkit-scrollbar{
+    width:8px;
+}
+
+.letterPaper::-webkit-scrollbar-thumb{
+    background:#d8b4e2;
+    border-radius:10px;
 }
 
 /* PETALS */
@@ -281,23 +309,52 @@ button:hover{
 @media(max-width:768px){
 
     .countdownBox,
-    .mainCard,
-    .letterPaper{
+    .mainCard{
         width:92%;
-        padding:35px;
+        padding:35px 25px;
+    }
+
+    .letterPaper{
+        width:100%;
+        max-width:100%;
+        max-height:80vh;
+
+        padding:35px 25px;
+
+        border-radius:18px;
     }
 
     .countdownBox h1,
     .mainCard h1{
-        font-size:2.5rem;
+        font-size:2.3rem;
+    }
+
+    .subtitleLetter,
+    .countdownBox h2{
+        font-size:2.4rem;
     }
 
     #countdown{
-        font-size:3rem;
+        font-size:2.8rem;
+    }
+
+    .mainCard p{
+        font-size:1.15rem;
+        line-height:1.6;
     }
 
     .typingText{
-        font-size:1.1rem;
+        font-size:1.05rem;
+        line-height:1.9;
+    }
+
+    button{
+        width:100%;
+        padding:15px;
+    }
+
+    .cat{
+        font-size:2.2rem;
     }
 
 }
