@@ -28,6 +28,15 @@ body{
     url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1974&auto=format&fit=crop') center/cover;
 }
 
+#enterButton{
+    margin-top:30px;
+}
+
+#enterButton:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
 .overlay{
     position:absolute;
     inset:0;
