@@ -1,369 +1,236 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+const countdown = document.getElementById("countdown");
+const lockScreen = document.getElementById("lockScreen");
+const mainContent = document.getElementById("mainContent");
+const openLetterBtn = document.getElementById("openLetterBtn");
+const letterModal = document.getElementById("letterModal");
+const closeLetter = document.getElementById("closeLetter");
+const typingText = document.getElementById("typingText");
+const music = document.getElementById("bgMusic");
+const enterButton = document.getElementById("enterButton");
 
-body{
-    font-family:'Cormorant Garamond', serif;
-    overflow:hidden;
-    background:#0d0a14;
-    color:white;
-}
 
-.hidden{
-    display:none !important;
-}
+// ✨ FECHA DEL CUMPLE
+const targetDate = new Date("May 21, 2026 00:00:00").getTime();
 
-/* LOCK SCREEN */
 
-#lockScreen{
-    position:relative;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:
-    linear-gradient(rgba(10,10,20,.65), rgba(10,10,20,.75)),
-    url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1974&auto=format&fit=crop') center/cover;
-}
+// 🔒 BOTÓN BLOQUEADO AL INICIO
+enterButton.disabled = true;
 
-#enterButton{
-    margin-top:30px;
-}
 
-#enterButton:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-}
+// COUNTDOWN
+const interval = setInterval(() => {
 
-.overlay{
-    position:absolute;
-    inset:0;
-    backdrop-filter:blur(2px);
-}
+    const now = new Date().getTime();
+    const distance = targetDate - now;
 
-.countdownBox{
-    position:relative;
-    z-index:2;
-    width:750px;
-    text-align:center;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.2);
-    backdrop-filter:blur(12px);
-    padding:60px;
-    border-radius:24px;
-}
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
 
-.countdownBox h2{
-    font-family:'Great Vibes', cursive;
-    font-size:3rem;
-    color:#f8d5ff;
-}
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
 
-.countdownBox h1{
-    margin-top:10px;
-    font-size:3rem;
-    font-weight:500;
-}
+    const seconds = Math.floor(
+        (distance % (1000 * 60))
+        / 1000
+    );
 
-#countdown{
-    font-size:5rem;
-    margin:25px 0;
-    color:#ffe8ff;
-}
+    countdown.innerHTML =
+        `${String(hours).padStart(2, '0')}:`
+        + `${String(minutes).padStart(2, '0')}:`
+        + `${String(seconds).padStart(2, '0')}`;
 
-.countdownBox p{
-    font-size:1.2rem;
-    opacity:.85;
-}
 
-/* STARS */
+    // ✨ CUANDO LLEGA A MEDIANOCHE
+    if(distance <= 0){
 
-.stars{
-    position:absolute;
-    inset:0;
-    background-image:
-      radial-gradient(white 1px, transparent 1px);
-    background-size:50px 50px;
-    opacity:.18;
-    animation:starsMove 20s linear infinite;
-}
+        clearInterval(interval);
 
-@keyframes starsMove{
-    from{ transform:translateY(0); }
-    to{ transform:translateY(50px); }
-}
+        countdown.innerHTML = "00:00:00";
 
-/* CATS */
+        document.querySelector(".countdownBox h1").innerHTML =
+        "El Salón está abierto ✨";
 
-.cat{
-    position:absolute;
-    bottom:40px;
-    font-size:3rem;
-    z-index:2;
-}
+        // 🔓 DESBLOQUEAR BOTÓN
+        enterButton.disabled = false;
 
-.cat1{
-    animation:walk1 20s linear infinite;
-}
+        enterButton.innerHTML =
+        "Entrar al Salón 🎻";
 
-.cat2{
-    animation:walk2 24s linear infinite;
-    bottom:90px;
-}
-
-.cat3{
-    animation:walk3 28s linear infinite;
-    bottom:140px;
-}
-
-@keyframes walk1{
-    from{ left:-10%; }
-    to{ left:110%; }
-}
-
-@keyframes walk2{
-    from{ left:110%; }
-    to{ left:-10%; }
-}
-
-@keyframes walk3{
-    from{ left:-15%; }
-    to{ left:110%; }
-}
-
-/* MAIN CONTENT */
-
-#mainContent{
-    position:relative;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:
-    linear-gradient(rgba(20,10,30,.45), rgba(20,10,30,.55)),
-    url('https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?q=80&w=1974&auto=format&fit=crop') center/cover;
-}
-
-.mainOverlay{
-    position:absolute;
-    inset:0;
-    backdrop-filter:blur(2px);
-}
-
-.mainCard{
-    position:relative;
-    z-index:2;
-    width:700px;
-    text-align:center;
-    padding:60px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:25px;
-    backdrop-filter:blur(10px);
-    animation:fadeIn 2s ease;
-}
-
-.subtitleLetter{
-    font-family:'Great Vibes', cursive;
-    font-size:3rem;
-    color:#f6d2ff;
-}
-
-.mainCard h1{
-    font-size:4rem;
-    margin:15px 0;
-}
-
-.mainCard p{
-    font-size:1.4rem;
-    line-height:1.7;
-}
-
-button{
-    margin-top:35px;
-    padding:16px 36px;
-    border:none;
-    border-radius:50px;
-    background:#f7d7ff;
-    color:#2b1638;
-    font-size:1rem;
-    cursor:pointer;
-    transition:.4s;
-}
-
-button:hover{
-    transform:scale(1.06);
-    background:white;
-}
-
-/* LETTER */
-
-.letterModal{
-    position:fixed;
-    inset:0;
-
-    background:rgba(0,0,0,.75);
-
-    display:none;
-
-    justify-content:center;
-    align-items:center;
-
-    padding:20px;
-
-    z-index:50;
-}
-
-.letterPaper{
-    position:relative;
-
-    width:700px;
-    max-width:92%;
-
-    max-height:85vh;
-
-    overflow-y:auto;
-
-    background:#fffaf4;
-    color:#2f1c3b;
-
-    padding:60px;
-
-    border-radius:20px;
-
-    box-shadow:0 0 50px rgba(0,0,0,.4);
-
-    animation:popup .6s ease;
-}
-
-.letterPaper h2{
-    font-family:'Great Vibes', cursive;
-    font-size:3.2rem;
-    margin-bottom:30px;
-}
-
-.typingText{
-    font-size:1.35rem;
-    line-height:2;
-    white-space:pre-line;
-}
-
-#closeLetter{
-    position:absolute;
-    top:20px;
-    right:25px;
-    cursor:pointer;
-    font-size:1.5rem;
-}
-
-/* SCROLLBAR */
-
-.letterPaper::-webkit-scrollbar{
-    width:8px;
-}
-
-.letterPaper::-webkit-scrollbar-thumb{
-    background:#d8b4e2;
-    border-radius:10px;
-}
-
-/* PETALS */
-
-.petal{
-    position:fixed;
-    top:-10px;
-    font-size:1.5rem;
-    animation:fall linear forwards;
-    z-index:100;
-    pointer-events:none;
-}
-
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(360deg);
-        opacity:0;
-    }
-}
-
-/* ANIMATIONS */
-
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(40px);
     }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
+}, 1000);
+
+
+
+
+// ✨ ENTRAR A LA EXPERIENCIA
+enterButton.addEventListener("click", () => {
+
+    // 🚫 SI SIGUE BLOQUEADO NO HACE NADA
+    if(enterButton.disabled) return;
+
+
+    // 🎼 MÚSICA CON FADE
+    music.volume = 0;
+
+    music.play();
+
+    let vol = 0;
+
+    const fade = setInterval(() => {
+
+        if(vol < 0.4){
+
+            vol += 0.02;
+
+            music.volume = vol;
+
+        }else{
+
+            clearInterval(fade);
+
+        }
+
+    }, 200);
+
+
+    // ✨ CAMBIO DE PANTALLA
+    lockScreen.classList.add("hidden");
+
+    mainContent.classList.remove("hidden");
+
+});
+
+
+
+
+// LETTER
+
+const message = `
+En este día tan distinguido, todo el reino celebra la existencia de un alma verdaderamente extraordinaria.
+
+Una dama poseedora de una dulzura incomparable,
+de un corazón tan noble como encantador,
+y de una sonrisa capaz de transformar los instantes más ordinarios en recuerdos eternos.
+
+Que este nuevo capítulo de vuestra vida llegue colmado de dicha,
+de delicadas melodías, de sueños cumplidos con gracia y fortuna,
+y de adorables felinos que acompañen cada una de vuestras aventuras.
+
+Pues entre todos los salones, jardines y rincones del reino…
+jamás ha existido alguien tan singular como vos.
+
+Feliz cumpleaños, Lady Gene ✨
+
+Con la más alta admiración,
+
+Aleskai Gethsemane
+`;
+
+
+
+
+// ✨ ABRIR CARTA
+openLetterBtn.addEventListener("click", () => {
+
+    letterModal.style.display = "flex";
+
+    createPetals();
+
+    typeWriter();
+
+});
+
+
+
+
+// ✨ CERRAR CARTA
+closeLetter.addEventListener("click", () => {
+
+    letterModal.style.display = "none";
+
+});
+
+
+window.addEventListener("click", (e) => {
+
+    if(e.target === letterModal){
+
+        letterModal.style.display = "none";
+
     }
+
+});
+
+
+
+
+// ✨ TYPEWRITER
+let i = 0;
+
+function typeWriter(){
+
+    typingText.innerHTML = "";
+
+    i = 0;
+
+    function typing(){
+
+        if(i < message.length){
+
+            typingText.innerHTML += message.charAt(i);
+
+            i++;
+
+            setTimeout(typing, 35);
+
+        }
+
+    }
+
+    typing();
+
 }
 
-@keyframes popup{
-    from{
-        transform:scale(.8);
-        opacity:0;
-    }
 
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-}
 
-/* RESPONSIVE */
 
-@media(max-width:768px){
+// ✨ PETALS
+function createPetals(){
 
-    .countdownBox,
-    .mainCard{
-        width:92%;
-        padding:35px 25px;
-    }
+    for(let i = 0; i < 80; i++){
 
-    .letterPaper{
-        width:100%;
-        max-width:100%;
-        max-height:80vh;
+        const petal = document.createElement("div");
 
-        padding:35px 25px;
+        petal.classList.add("petal");
 
-        border-radius:18px;
-    }
+        petal.innerHTML =
+        Math.random() > .5 ? "🌸" : "🌺";
 
-    .countdownBox h1,
-    .mainCard h1{
-        font-size:2.3rem;
-    }
+        petal.style.left =
+        Math.random() * 100 + "vw";
 
-    .subtitleLetter,
-    .countdownBox h2{
-        font-size:2.4rem;
-    }
+        petal.style.animationDuration =
+        (Math.random() * 5 + 5) + "s";
 
-    #countdown{
-        font-size:2.8rem;
-    }
+        petal.style.opacity =
+        Math.random();
 
-    .mainCard p{
-        font-size:1.15rem;
-        line-height:1.6;
-    }
+        petal.style.fontSize =
+        (Math.random() * 18 + 10) + "px";
 
-    .typingText{
-        font-size:1.05rem;
-        line-height:1.9;
-    }
+        document.body.appendChild(petal);
 
-    button{
-        width:100%;
-        padding:15px;
-    }
+        setTimeout(() => {
 
-    .cat{
-        font-size:2.2rem;
+            petal.remove();
+
+        }, 10000);
+
     }
 
 }
