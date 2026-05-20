@@ -56,10 +56,13 @@ jamás ha existido alguien tan singular como vos.
 
 Feliz cumpleaños, Lady Gene.✨
 
+...
 Con la más alta admiración,
-**Aleskai Gethsemane**
+
+Aleskai Gethsemane
 
 `;
+typingText.innerHTML += "<br><br><strong>Aleskai Gethsemane</strong>";
 
 
 openLetterBtn.addEventListener("click", () => {
