@@ -1,0 +1,303 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Cormorant Garamond', serif;
+    overflow:hidden;
+    background:#0d0a14;
+    color:white;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* LOCK SCREEN */
+
+#lockScreen{
+    position:relative;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    linear-gradient(rgba(10,10,20,.65), rgba(10,10,20,.75)),
+    url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1974&auto=format&fit=crop') center/cover;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    backdrop-filter:blur(2px);
+}
+
+.countdownBox{
+    position:relative;
+    z-index:2;
+    width:750px;
+    text-align:center;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.2);
+    backdrop-filter:blur(12px);
+    padding:60px;
+    border-radius:24px;
+}
+
+.countdownBox h2{
+    font-family:'Great Vibes', cursive;
+    font-size:3rem;
+    color:#f8d5ff;
+}
+
+.countdownBox h1{
+    margin-top:10px;
+    font-size:3rem;
+    font-weight:500;
+}
+
+#countdown{
+    font-size:5rem;
+    margin:25px 0;
+    color:#ffe8ff;
+}
+
+.countdownBox p{
+    font-size:1.2rem;
+    opacity:.85;
+}
+
+/* STARS */
+
+.stars{
+    position:absolute;
+    inset:0;
+    background-image:
+      radial-gradient(white 1px, transparent 1px);
+    background-size:50px 50px;
+    opacity:.18;
+    animation:starsMove 20s linear infinite;
+}
+
+@keyframes starsMove{
+    from{ transform:translateY(0); }
+    to{ transform:translateY(50px); }
+}
+
+/* CATS */
+
+.cat{
+    position:absolute;
+    bottom:40px;
+    font-size:3rem;
+    z-index:2;
+}
+
+.cat1{
+    animation:walk1 20s linear infinite;
+}
+
+.cat2{
+    animation:walk2 24s linear infinite;
+    bottom:90px;
+}
+
+.cat3{
+    animation:walk3 28s linear infinite;
+    bottom:140px;
+}
+
+@keyframes walk1{
+    from{ left:-10%; }
+    to{ left:110%; }
+}
+
+@keyframes walk2{
+    from{ left:110%; }
+    to{ left:-10%; }
+}
+
+@keyframes walk3{
+    from{ left:-15%; }
+    to{ left:110%; }
+}
+
+/* MAIN CONTENT */
+
+#mainContent{
+    position:relative;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    linear-gradient(rgba(20,10,30,.45), rgba(20,10,30,.55)),
+    url('https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?q=80&w=1974&auto=format&fit=crop') center/cover;
+}
+
+.mainOverlay{
+    position:absolute;
+    inset:0;
+    backdrop-filter:blur(2px);
+}
+
+.mainCard{
+    position:relative;
+    z-index:2;
+    width:700px;
+    text-align:center;
+    padding:60px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:25px;
+    backdrop-filter:blur(10px);
+    animation:fadeIn 2s ease;
+}
+
+.subtitleLetter{
+    font-family:'Great Vibes', cursive;
+    font-size:3rem;
+    color:#f6d2ff;
+}
+
+.mainCard h1{
+    font-size:4rem;
+    margin:15px 0;
+}
+
+.mainCard p{
+    font-size:1.4rem;
+    line-height:1.7;
+}
+
+button{
+    margin-top:35px;
+    padding:16px 36px;
+    border:none;
+    border-radius:50px;
+    background:#f7d7ff;
+    color:#2b1638;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.4s;
+}
+
+button:hover{
+    transform:scale(1.06);
+    background:white;
+}
+
+/* LETTER */
+
+.letterModal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:50;
+}
+
+.letterPaper{
+    position:relative;
+    width:700px;
+    background:#fffaf4;
+    color:#2f1c3b;
+    padding:60px;
+    border-radius:20px;
+    box-shadow:0 0 50px rgba(0,0,0,.4);
+    animation:popup .6s ease;
+}
+
+.letterPaper h2{
+    font-family:'Great Vibes', cursive;
+    font-size:3.2rem;
+    margin-bottom:30px;
+}
+
+.typingText{
+    font-size:1.35rem;
+    line-height:2;
+    white-space:pre-line;
+}
+
+#closeLetter{
+    position:absolute;
+    top:20px;
+    right:25px;
+    cursor:pointer;
+    font-size:1.5rem;
+}
+
+/* PETALS */
+
+.petal{
+    position:fixed;
+    top:-10px;
+    font-size:1.5rem;
+    animation:fall linear forwards;
+    z-index:100;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes popup{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .countdownBox,
+    .mainCard,
+    .letterPaper{
+        width:92%;
+        padding:35px;
+    }
+
+    .countdownBox h1,
+    .mainCard h1{
+        font-size:2.5rem;
+    }
+
+    #countdown{
+        font-size:3rem;
+    }
+
+    .typingText{
+        font-size:1.1rem;
+    }
+
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lady Gene ✨</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- MUSIC -->
+  <audio id="bgMusic" loop>
+    <source src="music/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- LOCK SCREEN -->
+  <section id="lockScreen">
+
+    <div class="overlay"></div>
+
+    <div class="stars"></div>
+
+    <div class="countdownBox">
+      <h2>Querido Lector...</h2>
+
+      <h1>La tan esperada celebración de Lady Gene está a punto de comenzar. </h1>
+
+      <div id="countdown">
+        00:00:00
+      </div>
+
+      <p>
+        Sin embargo, el Gran Salón de Baile permanecerá cerrado hasta que el reloj anuncie la medianoche.
+Y creedme… la espera bien valdrá semejante acontecimiento. ✨
+      </p>
+    </div>
+
+    <!-- WALKING CATS -->
+    <div class="cat cat1">🐈</div>
+    <div class="cat cat2">🐈‍⬛</div>
+    <div class="cat cat3">🐈</div>
+
+  </section>
+
+
+  <!-- MAIN EXPERIENCE -->
+  <section id="mainContent" class="hidden">
+
+    <div class="mainOverlay"></div>
+
+    <div class="mainCard">
+
+      <h2 class="subtitleLetter">To Lady Gene</h2>
+
+      <h1>Feliz Cumpleaños ✨</h1>
+
+      <p>
+        Este día, toda la sociedad celebra a la dama más encantadora de todo el reino.
+      </p>
+
+      <button id="openLetterBtn">
+        Abrir la carta 💌
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- LETTER MODAL -->
+  <div class="letterModal" id="letterModal">
+
+    <div class="letterPaper">
+
+      <span id="closeLetter">✕</span>
+
+      <h2>Dear Gene,</h2>
+
+      <div class="typingText" id="typingText"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PETALS -->
+  <div id="petalsContainer"></div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
